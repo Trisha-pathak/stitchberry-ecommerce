@@ -2,15 +2,27 @@
 
 A full-stack, animated pastel e-commerce and custom service platform built with **Next.js 15 (App Router)**, **React 19**, **TypeScript**, **Tailwind CSS**, **Framer Motion**, and **Prisma ORM**.
 
-## Database Setup & Recommendation
+## Hosting on Vercel (Recommended)
 
-- **Local Development (Out of the box):** Configured with **SQLite** via Prisma (`prisma/schema.prisma`, `DATABASE_URL="file:./dev.db"`) so you can run, seed, and test every workflow immediately without external database setup.
-- **Recommended Production Database:** **PostgreSQL (Supabase or Neon)** paired with **Prisma ORM** and **Supabase Storage / Cloudinary** for customer garment/inspiration photos. A mirror schema is provided in `prisma/schema.postgresql.prisma`. To switch:
-  1. Set `provider = "postgresql"` in `prisma/schema.prisma` (or copy `prisma/schema.postgresql.prisma`).
-  2. Update `DATABASE_URL` in `.env` to your PostgreSQL/Supabase connection string.
-  3. Run `npx prisma db push && npm run db:seed`.
+Because Vercel uses serverless functions (which cannot persist a local SQLite file), host StitchBerry with a **PostgreSQL** database (such as **Neon** or **Supabase** from Vercel's Storage Marketplace):
 
-## Quick Start
+1. **Import on Vercel:**
+   - Go to [vercel.com/new](https://vercel.com/new) and import `Trisha-pathak/stitchberry-ecommerce`.
+2. **Attach PostgreSQL & Environment Variables:**
+   - In your Vercel project, go to **Storage → Create Database → Neon / Supabase Postgres** (or paste your PostgreSQL URL as `DATABASE_URL`).
+   - Add `JWT_SECRET` (any long random string) in **Settings → Environment Variables**.
+   - Optional: Add **Vercel Blob** (`BLOB_READ_WRITE_TOKEN`) for cloud image uploads, and `NEXT_PUBLIC_RAZORPAY_KEY_ID` + `RAZORPAY_KEY_SECRET` for live Razorpay payments.
+   - `scripts/prepare-db.mjs` automatically switches Prisma to `provider = "postgresql"` whenever `DATABASE_URL` starts with `postgres://` or `postgresql://` during `npm run build`.
+3. **Push Schema & Seed Initial Catalog (once):**
+   Run locally using your production `DATABASE_URL`:
+   ```bash
+   set DATABASE_URL="postgresql://..."
+   npx prisma db push
+   npm run db:seed
+   ```
+   *(On PowerShell: `$env:DATABASE_URL="postgresql://..."; npm run db:push; npm run db:seed`)*
+
+## Local Development
 
 ```bash
 npm install
@@ -38,7 +50,3 @@ Open `http://localhost:3000`.
 - `STITCH10` — 10% off
 - `PASTEL15` — 15% off
 - `FREESHIP` — Free shipping
-
-## Razorpay Configuration
-
-Set `NEXT_PUBLIC_RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` in `.env` to activate live Razorpay orders via `/api/payments/razorpay`. Without secret keys, checkout runs in deterministic sandbox mode for local testing.
