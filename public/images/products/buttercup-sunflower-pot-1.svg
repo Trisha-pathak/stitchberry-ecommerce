@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF0B8"/>
+      <stop offset="100%" stop-color="#FADCE8"/>
+    </linearGradient>
+    <pattern id="knit" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 10 Q5 4 10 10 T20 10" fill="none" stroke="#59434A" stroke-opacity="0.06" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="400" rx="36" fill="url(#g)"/>
+  <rect width="400" height="400" rx="36" fill="url(#knit)"/>
+  <circle cx="68" cy="70" r="18" fill="#FFF8ED" fill-opacity="0.65"/>
+  <circle cx="332" cy="84" r="12" fill="#FFF0B8" fill-opacity="0.8"/>
+  <path d="M40 330 Q140 295 220 335 T365 315" fill="none" stroke="#59434A" stroke-opacity="0.22" stroke-width="2.5" stroke-dasharray="6 6"/>
+  
+      <g transform="translate(200,205) ">
+        <path d="M-45 25 L0 120 L45 25 Z" fill="#FFF8ED" stroke="#59434A" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M-28 55 Q0 72 28 55" fill="none" stroke="#BFE3F5" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="-28" cy="-22" r="24" fill="#BFE3F5" stroke="#59434A" stroke-width="3"/>
+        <circle cx="28" cy="-18" r="22" fill="#BFE3F5" stroke="#59434A" stroke-width="3"/>
+        <circle cx="0" cy="-42" r="26" fill="#FFF0B8" stroke="#59434A" stroke-width="3"/>
+        <circle cx="0" cy="4" r="22" fill="#E7DDF7" stroke="#59434A" stroke-width="3"/>
+        <path d="M-28 -22 Q-18 -34 -8 -22 M28 -18 Q18 -30 8 -18 M0 -42 Q0 -55 10 -44" stroke="#59434A" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M-12 72 Q0 62 12 72" stroke="#59434A" stroke-width="3" fill="none"/>
+      </g>
+  <rect x="24" y="340" width="150" height="34" rx="17" fill="#FFF8ED" fill-opacity="0.92" stroke="#59434A" stroke-opacity="0.2"/>
+  <text x="99" y="362" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#59434A">Studio Portrait</text>
+</svg>

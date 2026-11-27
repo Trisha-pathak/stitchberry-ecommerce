@@ -1,0 +1,248 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  passwordHash  String
+  phone         String   @default("")
+  role          String   @default("CUSTOMER") // CUSTOMER | ADMIN
+  avatarColor   String   @default("#F7C6D9")
+  createdAt     DateTime @default(now())
+
+  addresses     Address[]
+  reviews       Review[]
+  wishlistItems WishlistItem[]
+  orders        Order[]
+  preOrders     CrochetPreOrder[]
+  embroideries  EmbroideryBooking[]
+  savedDesigns  SavedDesign[]
+  notifications Notification[]
+  tickets       SupportTicket[]
+}
+
+model Address {
+  id        String  @id @default(cuid())
+  userId    String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label     String
+  fullName  String
+  phone     String
+  line1     String
+  line2     String  @default("")
+  city      String
+  state     String
+  pincode   String
+  isDefault Boolean @default(false)
+}
+
+model Product {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  name           String
+  category       String
+  description    String
+  specifications String
+  price          Float
+  compareAtPrice Float?
+  stock          Int      @default(10)
+  isOutOfStock   Boolean  @default(false)
+  colorsJson     String   // JSON array of { name, hex }
+  sizesJson      String   // JSON array of strings
+  imagesJson     String   // JSON array of URLs
+  ratingAvg      Float    @default(4.9)
+  ratingCount    Int      @default(0)
+  popularity     Int      @default(50)
+  isFeatured     Boolean  @default(false)
+  isSeasonal     Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  reviews       Review[]
+  wishlistItems WishlistItem[]
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  authorName String
+  rating     Int
+  comment    String
+  createdAt  DateTime @default(now())
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+model Order {
+  id                String   @id @default(cuid())
+  orderNumber       String   @unique
+  userId            String?
+  user              User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  customerName      String
+  customerEmail     String
+  customerPhone     String
+  addressJson       String
+  itemsJson         String
+  couponCode        String   @default("")
+  subtotal          Float
+  discount          Float    @default(0)
+  shippingFee       Float    @default(0)
+  tax               Float    @default(0)
+  total             Float
+  paymentMethod     String   @default("RAZORPAY")
+  paymentStatus     String   @default("PAID")
+  razorpayOrderId   String   @default("")
+  razorpayPaymentId String   @default("")
+  status            String   @default("Confirmed")
+  giftWrap          Boolean  @default(false)
+  giftNote          String   @default("")
+  createdAt         DateTime @default(now())
+}
+
+model CrochetPreOrder {
+  id                   String   @id @default(cuid())
+  preOrderNumber       String   @unique
+  userId               String?
+  user                 User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  productType          String
+  baseProductId        String   @default("")
+  selectedColorsJson   String
+  size                 String
+  designVariation      String
+  personalizedText     String   @default("")
+  referenceImageUrl    String   @default("")
+  specialInstructions  String   @default("")
+  quantity             Int      @default(1)
+  requiredDeliveryDate String
+  timelinePreference   String   @default("Standard (10-14 days)")
+  estimatedPrice       Float
+  quotedPrice          Float?
+  advanceAmount        Float    @default(0)
+  paymentStatus        String   @default("Pending Advance")
+  status               String   @default("Pre-Order Received")
+  expectedDeliveryDate String   @default("")
+  deliveryAddressJson  String
+  contactName          String
+  contactPhone         String
+  contactEmail         String
+  adminNotes           String   @default("")
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model EmbroideryBooking {
+  id                         String   @id @default(cuid())
+  bookingNumber              String   @unique
+  userId                     String?
+  user                       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  garmentType                String
+  otherGarmentText           String   @default("")
+  garmentImageUrl            String   @default("")
+  referenceDesignUrl         String   @default("")
+  inspirationImageUrl        String   @default("")
+  placement                  String
+  threadColorsJson           String
+  designSize                 String
+  embroideryType             String
+  personalizedText           String   @default("")
+  additionalInstructions     String   @default("")
+  customerName               String
+  mobileNumber               String
+  customerEmail              String   @default("")
+  pickupAddress              String
+  pincode                    String
+  preferredPickupDate        String
+  preferredPickupSlot        String
+  estimatedPrice             Float
+  confirmedPrice             Float?
+  pickupCharge               Float    @default(99)
+  deliveryCharge             Float    @default(99)
+  estimatedCompletionDays    Int      @default(10)
+  status                     String   @default("Booking received")
+  pickupPersonName           String   @default("")
+  pickupPersonPhone          String   @default("")
+  pickupScheduledAt          String   @default("")
+  garmentConditionNotes      String   @default("")
+  garmentConditionPhotosJson String   @default("[]")
+  completedWorkPhotosJson    String   @default("[]")
+  paymentStatus              String   @default("Quotation Pending")
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+}
+
+model SavedDesign {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title      String
+  designType String   @default("Yarn Palette")
+  colorsJson String
+  notes      String   @default("")
+  createdAt  DateTime @default(now())
+}
+
+model CustomGiftRequest {
+  id                String   @id @default(cuid())
+  name              String
+  email             String
+  phone             String
+  occasion          String
+  giftIdea          String
+  referenceImageUrl String   @default("")
+  budgetRange       String
+  deliveryDate      String
+  giftNote          String   @default("")
+  status            String   @default("Received")
+  createdAt         DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   @default("ORDER")
+  isRead    Boolean  @default(false)
+  link      String   @default("/account")
+  createdAt DateTime @default(now())
+}
+
+model SupportTicket {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name       String
+  email      String
+  subject    String
+  message    String
+  orderRef   String   @default("")
+  status     String   @default("Open")
+  adminReply String   @default("")
+  createdAt  DateTime @default(now())
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}

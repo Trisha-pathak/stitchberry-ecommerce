@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FADCE8"/>
+      <stop offset="100%" stop-color="#FFF0B8"/>
+    </linearGradient>
+    <pattern id="knit" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 10 Q5 4 10 10 T20 10" fill="none" stroke="#59434A" stroke-opacity="0.06" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="400" rx="36" fill="url(#g)"/>
+  <rect width="400" height="400" rx="36" fill="url(#knit)"/>
+  <circle cx="68" cy="70" r="18" fill="#FFF8ED" fill-opacity="0.65"/>
+  <circle cx="332" cy="84" r="12" fill="#FFF0B8" fill-opacity="0.8"/>
+  <path d="M40 330 Q140 295 220 335 T365 315" fill="none" stroke="#59434A" stroke-opacity="0.22" stroke-width="2.5" stroke-dasharray="6 6"/>
+  
+      <g transform="translate(200,210) scale(1.14)">
+        <ellipse cx="-32" cy="-64" rx="16" ry="38" transform="rotate(-12 -32 -64)" fill="#FFF8ED" stroke="#59434A" stroke-width="3.5"/>
+        <ellipse cx="32" cy="-64" rx="16" ry="38" transform="rotate(12 32 -64)" fill="#FFF8ED" stroke="#59434A" stroke-width="3.5"/>
+        <ellipse cx="-32" cy="-62" rx="8" ry="22" transform="rotate(-12 -32 -62)" fill="#F7C6D9"/>
+        <ellipse cx="32" cy="-62" rx="8" ry="22" transform="rotate(12 32 -62)" fill="#F7C6D9"/>
+        <circle cx="0" cy="-14" r="52" fill="#FFF8ED" stroke="#59434A" stroke-width="3.5"/>
+        <ellipse cx="0" cy="56" rx="44" ry="42" fill="#FADCE8" stroke="#59434A" stroke-width="3.5"/>
+        <circle cx="-18" cy="-18" r="5" fill="#59434A"/>
+        <circle cx="18" cy="-18" r="5" fill="#59434A"/>
+        <ellipse cx="-26" cy="-6" rx="8" ry="5" fill="#F7C6D9"/>
+        <ellipse cx="26" cy="-6" rx="8" ry="5" fill="#F7C6D9"/>
+        <path d="M-6 -6 Q0 2 6 -6" fill="none" stroke="#59434A" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="0" cy="46" r="14" fill="#FFF0B8" stroke="#59434A" stroke-width="2.5"/>
+      </g>
+  <rect x="24" y="340" width="150" height="34" rx="17" fill="#FFF8ED" fill-opacity="0.92" stroke="#59434A" stroke-opacity="0.2"/>
+  <text x="99" y="362" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#59434A">Close-Up Stitch</text>
+</svg>

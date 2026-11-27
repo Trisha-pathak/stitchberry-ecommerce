@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360">
+  <defs>
+    <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F7C6D9"/>
+      <stop offset="100%" stop-color="#E7DDF7"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="360" rx="32" fill="url(#gg)"/>
+  <circle cx="240" cy="165" r="95" fill="#FFF8ED" stroke="#59434A" stroke-width="3" stroke-dasharray="8 6"/>
+  <circle cx="240" cy="165" r="56" fill="#F7C6D9" stroke="#59434A" stroke-width="2.5"/>
+  <path d="M210 165 Q240 125 270 165 Q240 205 210 165 Z" fill="#FFF0B8" stroke="#59434A" stroke-width="2.5"/>
+  <circle cx="240" cy="165" r="12" fill="#F7C6D9" stroke="#59434A" stroke-width="2"/>
+  <rect x="40" y="294" width="400" height="42" rx="21" fill="#FFF8ED" fill-opacity="0.95"/>
+  <text x="240" y="320" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="700" fill="#59434A">Organza Saree Bullion Roses</text>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF0B8"/>
+      <stop offset="100%" stop-color="#BFE3F5"/>
+    </linearGradient>
+    <pattern id="knit" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M0 10 Q5 4 10 10 T20 10" fill="none" stroke="#59434A" stroke-opacity="0.06" stroke-width="1.5"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="400" rx="36" fill="url(#g)"/>
+  <rect width="400" height="400" rx="36" fill="url(#knit)"/>
+  <circle cx="68" cy="70" r="18" fill="#FFF8ED" fill-opacity="0.65"/>
+  <circle cx="332" cy="84" r="12" fill="#FFF0B8" fill-opacity="0.8"/>
+  <path d="M40 330 Q140 295 220 335 T365 315" fill="none" stroke="#59434A" stroke-opacity="0.22" stroke-width="2.5" stroke-dasharray="6 6"/>
+  
+      <g transform="translate(200,205) ">
+        <circle cx="0" cy="-76" r="20" fill="none" stroke="#59434A" stroke-width="5"/>
+        <line x1="0" y1="-56" x2="0" y2="-30" stroke="#59434A" stroke-width="4" stroke-dasharray="4 3"/>
+        <g transform="translate(0,18)">
+          <circle cx="0" cy="-34" r="22" fill="#FFF8ED" stroke="#59434A" stroke-width="3"/>
+          <circle cx="32" cy="-10" r="22" fill="#FFF8ED" stroke="#59434A" stroke-width="3"/>
+          <circle cx="20" cy="28" r="22" fill="#FFF8ED" stroke="#59434A" stroke-width="3"/>
+          <circle cx="-20" cy="28" r="22" fill="#FFF8ED" stroke="#59434A" stroke-width="3"/>
+          <circle cx="-32" cy="-10" r="22" fill="#FFF8ED" stroke="#59434A" stroke-width="3"/>
+          <circle cx="0" cy="0" r="22" fill="#F7C6D9" stroke="#59434A" stroke-width="3"/>
+          <circle cx="-6" cy="-3" r="3" fill="#59434A"/>
+          <circle cx="6" cy="-3" r="3" fill="#59434A"/>
+          <path d="M-4 4 Q0 9 4 4" fill="none" stroke="#59434A" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+      </g>
+  <rect x="24" y="340" width="150" height="34" rx="17" fill="#FFF8ED" fill-opacity="0.92" stroke="#59434A" stroke-opacity="0.2"/>
+  <text x="99" y="362" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="700" fill="#59434A">Studio Portrait</text>
+</svg>

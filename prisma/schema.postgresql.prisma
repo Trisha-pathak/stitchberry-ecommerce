@@ -1,0 +1,16 @@
+// Production PostgreSQL / Supabase schema mirror.
+// To deploy with Supabase or PostgreSQL:
+// 1. Copy this file over prisma/schema.prisma (or change provider = "postgresql").
+// 2. Set DATABASE_URL to your pooled PostgreSQL / Supabase connection string.
+// 3. Run: npx prisma migrate deploy && npm run db:seed
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Identical models to prisma/schema.prisma — all fields map directly to PostgreSQL types.
