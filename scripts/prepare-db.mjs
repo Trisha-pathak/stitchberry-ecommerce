@@ -34,3 +34,8 @@ if (needsGenerate) {
 } else {
   console.log("[prepare-db] Prisma client already up to date.");
 }
+
+if (process.env.VERCEL && targetProvider === "postgresql") {
+  console.log("[prepare-db] Syncing PostgreSQL schema on Vercel...");
+  execSync("npx prisma db push --skip-generate", { stdio: "inherit" });
+}

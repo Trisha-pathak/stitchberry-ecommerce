@@ -1,17 +1,10 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
+import { INITIAL_PRODUCTS } from "@/lib/seed-data";
 
 export async function POST(req: Request) {
   try {
-    const existingProducts = await prisma.product.count();
-    if (existingProducts > 0) {
-      return NextResponse.json({
-        ok: true,
-        message: "Database already seeded.",
-      });
-    }
-
     const secret = process.env.SEED_SECRET;
     if (secret) {
       const authHeader = req.headers.get("x-seed-secret");
@@ -36,7 +29,7 @@ export async function POST(req: Request) {
       },
     });
 
-    await prisma.user.upsert({
+    const customer = await prisma.user.upsert({
       where: { email: "ananya@stitchberry.in" },
       update: {},
       create: {
@@ -49,14 +42,35 @@ export async function POST(req: Request) {
       },
     });
 
+    const existingCount = await prisma.product.count();
+    if (existingCount === 0) {
+      for (const p of INITIAL_PRODUCTS) {
+        const prod = await prisma.product.upsert({
+          where: { slug: p.slug },
+          update: p,
+          create: p,
+        });
+        await prisma.review.create({
+          data: {
+            productId: prod.id,
+            userId: customer.id,
+            authorName: "Ananya S.",
+            rating: 5,
+            comment:
+              "The yarn is unbelievably soft and the pastel shades look straight out of a candy dream!",
+          },
+        });
+      }
+    }
+
     return NextResponse.json({
       ok: true,
-      message: "Demo users seeded. Run `npm run db:seed` for full sample catalog.",
+      message: "Catalog and demo accounts are ready!",
     });
   } catch (err) {
     console.error("Seed API error:", err);
     return NextResponse.json(
-      { error: "Database tables not pushed yet. Run `npx prisma db push`." },
+      { error: "Database not connected or tables not pushed yet." },
       { status: 500 }
     );
   }
